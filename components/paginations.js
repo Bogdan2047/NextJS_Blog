@@ -1,3 +1,5 @@
+import styles from "../styles/other.module.css";
+
 const Paginations = ({ defaultCurrent, total, paginate }) => {
   const pageNumbers = [];
 
@@ -19,6 +21,7 @@ const Paginations = ({ defaultCurrent, total, paginate }) => {
         >
           {pageNumbers.map((number) => (
             <li
+              className={styles.click}
               key={number}
               style={{
                 listStyleType: "none",

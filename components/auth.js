@@ -10,8 +10,6 @@ const Auth = ({ handleLogin }) => {
   let [password, setPassword] = useState("");
   const users = useSelector((state) => state.toolkit.user);
 
-  console.log(email, password);
-
   const dispatch = useDispatch();
 
   const deleteHandler = () => {

@@ -31,7 +31,11 @@ export const postsSlice = createSlice({
     },
     deleteComment: (state, action) => {
       state.posts.some((item) => {
-        item.commit = item?.commit.filter((item) => item.id !== action.payload);
+        if (item) {
+          item.commit = item?.commit.filter(
+            (item) => item.id !== action.payload
+          );
+        }
       });
     },
   },

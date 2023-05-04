@@ -62,9 +62,9 @@ const Register = ({ handleSignUp }) => {
     setPassword((password = e.target.value));
   };
 
-  const onFinish = (values = {}) => {
-    // console.log(values);
-  };
+  // const onFinish = (values = {}) => {
+  //   console.log(values);
+  // };
 
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>

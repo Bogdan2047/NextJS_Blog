@@ -13,8 +13,6 @@ const CardItem = ({ id, title, text, commit }) => {
 
   const [change, setChange] = useState("none");
   const [datas, setDatas] = useState("");
-  // let [changeStyle, setChangeStyle] = useState("posts");
-  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   const handleChangeOne = () => {
@@ -35,7 +33,6 @@ const CardItem = ({ id, title, text, commit }) => {
 
   const handleDelete = () => {
     dispatch(deletePost(id));
-    setOpen(true);
   };
 
   const handleTextArea = (e) => {

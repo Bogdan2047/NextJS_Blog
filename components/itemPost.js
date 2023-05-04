@@ -1,12 +1,6 @@
 import { Card } from "antd";
 
-const ItemPost = ({ posts, loading }) => {
-  // if (loading) {
-  //   return (
-
-  //   );
-  // }
-
+const ItemPost = ({ posts }) => {
   return (
     <div style={{ paddingLeft: "10%" }}>
       {posts &&
@@ -38,9 +32,6 @@ const ItemPost = ({ posts, loading }) => {
             </div>
           </Card>
         ))}
-      {/* {loading === true && (
-       
-      )} */}
     </div>
   );
 };
