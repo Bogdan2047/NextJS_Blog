@@ -10,17 +10,26 @@ import {
 import { Button, Menu } from "antd";
 import Link from "next/link";
 import { useState } from "react";
+import type { MenuProps } from 'antd';
 
-function getItem(label, key, icon, children, type) {
+type MenuItem = Required<MenuProps>['items'][number];
+
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  type?: 'group',
+): MenuItem {
   return {
     key,
     icon,
     children,
     label,
     type,
-  };
+  } as MenuItem;
 }
-const items = [
+const items: MenuItem[] = [
   getItem(<Link href="/login">Sing In</Link>, "1", <PieChartOutlined />),
   getItem(<Link href="/">Main</Link>, "2", <DesktopOutlined />),
   getItem(<Link href="/posts">Posts</Link>, "3", <ContainerOutlined />),

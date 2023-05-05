@@ -3,20 +3,20 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Space } from "antd";
 import { deleteComment } from "../rtk/slice";
+import { FC } from "react";
 
-const PostInfo = () => {
-  const info = useSelector((state) => state.toolkit.store.posts);
+const PostInfo:FC = () => {
+  const info = useSelector((state:any) => state.toolkit.store.posts);
   const dispatch = useDispatch();
 
   const router = useRouter();
 
   const { id } = router.query;
 
-  console.log(info);
 
   return (
     <div style={{ width: "100%", minHeight: "870px" }}>
-      {info.map((item) => {
+      {info.map((item:any) => {
         if (item === null) {
           return <></>;
         }
@@ -53,7 +53,7 @@ const PostInfo = () => {
                 </div>
                 <div style={{ width: "100%" }}>
                   {item.commit.length > 0 &&
-                    item.commit.map((elem) => {
+                    item.commit.map((elem:any) => {
                       if (elem !== null) {
                         return (
                           <div

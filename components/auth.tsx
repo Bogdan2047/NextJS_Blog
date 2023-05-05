@@ -1,14 +1,19 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Result } from "antd";
 import Link from "next/link";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../rtk/userSlice";
 
-const Auth = ({ handleLogin }) => {
+type propsAuth = {
+  handleLogin: any
+}
+
+const Auth:FC<propsAuth> = (props:propsAuth) => {
+  let { handleLogin } = props
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  const users = useSelector((state) => state.toolkit.user);
+  const users = useSelector((state:any) => state.toolkit.user);
 
   const dispatch = useDispatch();
 
@@ -20,11 +25,11 @@ const Auth = ({ handleLogin }) => {
     handleLogin(email, password);
   };
 
-  const onChangeOne = (e) => {
+  const onChangeOne = (e:any) => {
     setEmail((email = e.target.value));
   };
 
-  const onChangeTwo = (e) => {
+  const onChangeTwo = (e:any) => {
     setPassword((password = e.target.value));
   };
 

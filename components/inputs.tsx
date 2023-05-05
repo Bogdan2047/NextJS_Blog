@@ -10,18 +10,18 @@ const Inputs = () => {
 
   let [input, setInput] = useState("");
   let [text, setText] = useState("");
-  let [changeAlert, setChangeAlert] = useState("none");
+  const [changeAlert, setChangeAlert] = useState("none");
 
-  let users = useSelector((state) => state.toolkit.user);
+  const users = useSelector((state:any) => state.toolkit.user);
 
   const dispatch = useDispatch();
 
   const { TextArea } = Input;
-  const onChangeOne = (e) => {
+  const onChangeOne = (e:any) => {
     setInput((input = e.target.value));
   };
 
-  const onChangeTwo = (e) => {
+  const onChangeTwo = (e:any) => {
     setText((text = e.target.value));
   };
 
@@ -49,15 +49,15 @@ const Inputs = () => {
     text: text,
   };
 
-  const enterLoading = (index) => {
+  const enterLoading = (index:any) => {
     setLoadings((prevLoadings) => {
-      const newLoadings = [...prevLoadings];
+      const newLoadings:any = [...prevLoadings];
       newLoadings[index] = true;
       return newLoadings;
     });
     setTimeout(() => {
       setLoadings((prevLoadings) => {
-        const newLoadings = [...prevLoadings];
+        const newLoadings:any = [...prevLoadings];
         newLoadings[index] = false;
         return newLoadings;
       });
@@ -92,7 +92,7 @@ const Inputs = () => {
           />
         </div>
       )}
-      {users.email !== null && (
+      {users.email && (
         <>
           <div style={{ width: "100%" }}>
             <Alert

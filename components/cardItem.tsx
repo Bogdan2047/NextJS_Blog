@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Button, Space } from "antd";
 import { deletePost } from "@/rtk/slice";
 import { Card } from "antd";
@@ -8,8 +8,18 @@ import { getCommit } from "../rtk/slice";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/posts.module.css";
 
-const CardItem = ({ id, title, text, commit }) => {
+
+type propsCard = {
+  id: any,
+  title: string,
+  text: string,
+  commit?: any[]
+}
+
+const CardItem:FC<propsCard>= (props:propsCard) => {
   const { TextArea } = Input;
+
+  let { id, title, text, commit } = props
 
   const [change, setChange] = useState("none");
   const [datas, setDatas] = useState("");
@@ -19,7 +29,7 @@ const CardItem = ({ id, title, text, commit }) => {
     setChange("block");
   };
 
-  const handleChangeTwo = (id) => {
+  const handleChangeTwo = (id:string) => {
     const sendDatas = {
       id: id,
       text: datas,
@@ -35,11 +45,11 @@ const CardItem = ({ id, title, text, commit }) => {
     dispatch(deletePost(id));
   };
 
-  const handleTextArea = (e) => {
+  const handleTextArea = (e:any) => {
     setDatas((datas) => e.target.value);
   };
 
-  let totalComents = commit.length || 0;
+  let totalComents = commit?.length || 0;
 
   return (
     <div style={{ width: "100%" }}>
@@ -90,11 +100,11 @@ const CardItem = ({ id, title, text, commit }) => {
                   </div>
                   <div>
                     {commit === undefined && <></>}
-                    {commit !== undefined > 0 && (
+                    {commit?.length ? (
                       <div>
                         <h1>comments: {totalComents}</h1>
                       </div>
-                    )}
+                    ):undefined}
                   </div>
                   <div>
                     <Space wrap>

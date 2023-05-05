@@ -1,8 +1,9 @@
+import { FC } from 'react';
 import Cards from '../components/cards'
 import Inputs from '../components/inputs'
 
 
-const Home = () => {
+const Home:FC = () => {
   return (
     <div style={{ margin: "0 auto", width: "70%",minHeight: "865px"}}>
       <div style={{paddingLeft: "35%"}}>

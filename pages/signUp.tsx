@@ -1,14 +1,17 @@
 import { useDispatch } from "react-redux";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../rtk/userSlice";
-import Auth from "../components/auth";
+import Register from "../components/register";
+import { FC } from "react";
 
-const Login = () => {
+
+const SignUp:FC = () => {
   const dispatch = useDispatch();
 
-  const handleLogin = (email, password) => {
+  const handleSignUp = (email:string, password:string) => {
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+
+    createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         dispatch(
           setUser({
@@ -23,9 +26,9 @@ const Login = () => {
 
   return (
     <div style={{ width: "100%", minHeight: "870px" }}>
-      <Auth handleLogin={handleLogin} />
+      <Register handleSignUp={handleSignUp} />
     </div>
   );
 };
 
-export default Login;
+export default SignUp;

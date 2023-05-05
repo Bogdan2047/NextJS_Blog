@@ -1,6 +1,16 @@
+import { FC } from "react";
 import styles from "../styles/other.module.css";
 
-const Paginations = ({ defaultCurrent, total, paginate }) => {
+type propsPagin = {
+  defaultCurrent: number,
+  total: number,
+  paginate: any
+}
+
+const Paginations:FC<propsPagin> = (props:propsPagin) => {
+
+let { defaultCurrent, total, paginate } = props
+
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(total / defaultCurrent); i++) {
@@ -9,8 +19,7 @@ const Paginations = ({ defaultCurrent, total, paginate }) => {
 
   return (
     <>
-      {pageNumbers.length === 0 && <></>}
-      {pageNumbers.length > 0 && (
+      {pageNumbers.length ? (
         <div
           style={{
             display: "flex",
@@ -46,7 +55,7 @@ const Paginations = ({ defaultCurrent, total, paginate }) => {
             </li>
           ))}
         </div>
-      )}
+      ) : null}
     </>
   );
 };

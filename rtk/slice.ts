@@ -1,6 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type commitData = {
+  id: string,
+  comment: string
+}
+
+type postData = {
+  id?: string,
+  title?: string,
+  text?:string,
+  commit?: commitData[]
+}
+
+type postState = {
+  posts: postData[],
+};
+
+const initialState:postState = {
   posts: [],
 };
 
@@ -17,10 +33,10 @@ export const postsSlice = createSlice({
       });
     },
     deletePost: (state, action) => {
-      state.posts = state.posts.filter((item) => item?.id !== action.payload);
+      state.posts = state.posts.filter((item:any) => item?.id !== action.payload);
     },
     getCommit: (state, action) => {
-      state.posts.some((item) => {
+      state.posts.some((item:any) => {
         if (item?.id === action.payload.id) {
           item?.commit.push({
             id: new Date().toISOString(),
@@ -30,10 +46,10 @@ export const postsSlice = createSlice({
       });
     },
     deleteComment: (state, action) => {
-      state.posts.some((item) => {
+      state.posts.some((item:any) => {
         if (item) {
           item.commit = item?.commit.filter(
-            (item) => item.id !== action.payload
+            (item:any) => item.id !== action.payload
           );
         }
       });

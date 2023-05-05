@@ -1,6 +1,6 @@
 import { Button, Checkbox, Col, Form, Input, Row, Select, Result } from "antd";
 import Link from "next/link";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../rtk/userSlice";
 
@@ -36,13 +36,21 @@ const tailFormItemLayout = {
     },
   },
 };
-const Register = ({ handleSignUp }) => {
+
+
+
+type propsRegist = {
+  handleSignUp: any,
+}
+
+const Register:FC<propsRegist> = (props:propsRegist) => {
+  let { handleSignUp } = props
   const [form] = Form.useForm();
 
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
 
-  const users = useSelector((state) => state.toolkit.user);
+  const users = useSelector((state:any) => state.toolkit.user);
 
   const dispatch = useDispatch();
 
@@ -54,12 +62,12 @@ const Register = ({ handleSignUp }) => {
     handleSignUp(email, password);
   };
 
-  const onChangeOne = (e) => {
-    setEmail((email = e.target.value));
+  const onChangeOne = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail((email = event.target.value));
   };
 
-  const onChangeTwo = (e) => {
-    setPassword((password = e.target.value));
+  const onChangeTwo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword((password = event.target.value));
   };
 
   // const onFinish = (values = {}) => {
@@ -131,7 +139,7 @@ const Register = ({ handleSignUp }) => {
               {...formItemLayout}
               form={form}
               name="register"
-              onFinish={onFinish}
+              // onFinish={onFinish}
               initialValues={{
                 residence: ["zhejiang", "hangzhou", "xihu"],
                 prefix: "380",
