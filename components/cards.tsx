@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import CardItem from "./cardItem";
+import { FC } from "react";
 
-const Cards = () => {
+const Cards:FC = () => {
   const data = useSelector((state:any) => state.toolkit.store.posts);
   const users = useSelector((state:any) => state.toolkit.user);
 

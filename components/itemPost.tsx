@@ -1,6 +1,11 @@
 import { Card } from "antd";
+import { FC } from "react";
 
-const ItemPost = ({ posts }) => {
+type postProps = {
+  posts: any[]
+}
+
+const ItemPost:FC<postProps>= ({ posts }) => {
   return (
     <div style={{ paddingLeft: "10%" }}>
       {posts &&

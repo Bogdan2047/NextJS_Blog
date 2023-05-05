@@ -1,11 +1,11 @@
 import { getPosts } from "../rtk/slice";
 import { Button, Result, Alert } from "antd";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input } from "antd";
 import Link from "next/link";
 
-const Inputs = () => {
+const Inputs:FC = () => {
   const [loadings, setLoadings] = useState([]);
 
   let [input, setInput] = useState("");

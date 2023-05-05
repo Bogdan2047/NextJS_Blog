@@ -1,7 +1,8 @@
 import { Alert } from "antd";
-import React from "react";
+import React, { FC } from "react";
 import Marquee from "react-fast-marquee";
-const Footer = () => (
+
+const Footer:FC = () => (
   <Alert
     style={{ height: "80px", width: "100%" }}
     banner

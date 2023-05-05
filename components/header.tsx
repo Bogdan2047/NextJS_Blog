@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Menu } from "antd";
 import Link from "next/link";
-import { useState } from "react";
+import { FC, useState } from "react";
 import type { MenuProps } from 'antd';
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -40,7 +40,7 @@ const items: MenuItem[] = [
     getItem(<Link href="">About</Link>, "8"),
   ]),
 ];
-const Header = () => {
+const Header:FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
