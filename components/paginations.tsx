@@ -4,12 +4,15 @@ import styles from "../styles/other.module.css";
 type propsPagin = {
   defaultCurrent: number,
   total: number,
-  paginate: any
+  paginate: Function
 }
 
 const Paginations:FC<propsPagin> = (props:propsPagin) => {
 
 let { defaultCurrent, total, paginate } = props
+
+
+
 
   const pageNumbers = [];
 

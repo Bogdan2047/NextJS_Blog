@@ -1,21 +1,21 @@
-import { useSelector } from "react-redux";
 import CardItem from "./cardItem";
 import { FC } from "react";
+import { useAppSelector } from "@/hooks/hook";
 
 const Cards:FC = () => {
-  const data = useSelector((state:any) => state.toolkit.store.posts);
-  const users = useSelector((state:any) => state.toolkit.user);
+  const data = useAppSelector(state => state.toolkit.store.posts)
+  const users = useAppSelector(state => state.toolkit.user)
 
   return (
     <>
-      {users.email !== null && (
+      {users.email ? (
         <div>
           <div
             style={{ paddingTop: "20px", width: "100%", paddingBottom: "20px" }}
           >
             {data === undefined && <></>}
-            {data?.map((item:any) => {
-              if (item !== null) {
+            {data?.map((item) => {
+              if (item) {
                 return (
                   <CardItem
                     id={item.id}
@@ -32,7 +32,7 @@ const Cards:FC = () => {
             })}
           </div>
         </div>
-      )}
+      ):null}
     </>
   );
 };

@@ -5,18 +5,19 @@ import Paginations from "../components/paginations";
 import { Space, Spin } from "antd";
 
 const Posts:FC = () => {
-  const [posts, setPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
+  const [posts, setPosts] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [postsPerPage] = useState<number>(5);
 
   useEffect(() => {
-    const getPosts = async () => {
-      await axios.get("http://localhost:3000/api/postsData").then((data) => {
+    const getPosts = () => {
+      axios.get("/api/postsData").then((data) => {
         setPosts(data.data);
       });
     };
     getPosts();
   }, []);
+
 
   
 

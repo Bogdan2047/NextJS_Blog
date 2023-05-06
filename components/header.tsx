@@ -41,7 +41,7 @@ const items: MenuItem[] = [
   ]),
 ];
 const Header:FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState<boolean>(false);
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };

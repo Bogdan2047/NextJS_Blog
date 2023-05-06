@@ -2,20 +2,21 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Result } from "antd";
 import Link from "next/link";
 import { FC, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../rtk/userSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks/hook";
+
 
 type propsAuth = {
-  handleLogin: any
+  handleLogin: Function
 }
 
 const Auth:FC<propsAuth> = (props:propsAuth) => {
   let { handleLogin } = props
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
-  const users = useSelector((state:any) => state.toolkit.user);
+  let [email, setEmail] = useState<string>("");
+  let [password, setPassword] = useState<string>("");
+  const users = useAppSelector(state => state.toolkit.user)
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const deleteHandler = () => {
     dispatch(removeUser());
@@ -25,12 +26,12 @@ const Auth:FC<propsAuth> = (props:propsAuth) => {
     handleLogin(email, password);
   };
 
-  const onChangeOne = (e:any) => {
-    setEmail((email = e.target.value));
+  const onChangeOne = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
   };
 
-  const onChangeTwo = (e:any) => {
-    setPassword((password = e.target.value));
+  const onChangeTwo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword((e.target.value));
   };
 
   return (

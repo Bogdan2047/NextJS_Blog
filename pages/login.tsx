@@ -1,27 +1,24 @@
-import { useDispatch } from "react-redux";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../rtk/userSlice";
 import Auth from "../components/auth";
 import {FC} from "react"
+import { useAppDispatch } from "@/hooks/hook";
 
 
 const Login:FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleLogin = (email:any, password:any) => {
+  const handleLogin = (email:string, password:string) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password,)
-      .then(({ user }) => {
-        console.log(user)
+      .then(({user}) => {
           dispatch(
             setUser({
               email: user.email,
               id: user.uid,
               token: user.accessToken,
             })
-          );
-
-        
+          );        
       })
       .catch(console.error);
   };

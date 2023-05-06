@@ -1,12 +1,12 @@
-import { useDispatch } from "react-redux";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../rtk/userSlice";
 import Register from "../components/register";
 import { FC } from "react";
+import { useAppDispatch } from "@/hooks/hook";
 
 
 const SignUp:FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSignUp = (email:string, password:string) => {
     const auth = getAuth();

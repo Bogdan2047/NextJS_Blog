@@ -10,10 +10,10 @@ import styles from "../styles/posts.module.css";
 
 
 type propsCard = {
-  id: any,
-  title: string,
-  text: string,
-  commit?: any[]
+  id: string | any,
+  title: string | undefined,
+  text: string | undefined,
+  commit?: any[] | undefined[] | undefined,
 }
 
 const CardItem:FC<propsCard>= (props:propsCard) => {
@@ -21,8 +21,8 @@ const CardItem:FC<propsCard>= (props:propsCard) => {
 
   let { id, title, text, commit } = props
 
-  const [change, setChange] = useState("none");
-  const [datas, setDatas] = useState("");
+  const [change, setChange] = useState<string>("none");
+  const [datas, setDatas] = useState<string>("");
   const dispatch = useDispatch();
 
   const handleChangeOne = () => {
@@ -93,7 +93,7 @@ const CardItem:FC<propsCard>= (props:propsCard) => {
                 >
                   <div>
                     <Space wrap>
-                      <Button danger onClick={() => handleDelete()}>
+                      <Button danger onClick={handleDelete}>
                         Delete
                       </Button>
                     </Space>
@@ -111,7 +111,7 @@ const CardItem:FC<propsCard>= (props:propsCard) => {
                       <Button
                         type="primary"
                         style={{ backgroundColor: "royalblue" }}
-                        onClick={() => handleChangeOne()}
+                        onClick={handleChangeOne}
                       >
                         Add comment
                       </Button>

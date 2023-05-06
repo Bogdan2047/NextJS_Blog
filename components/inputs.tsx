@@ -1,28 +1,28 @@
 import { getPosts } from "../rtk/slice";
 import { Button, Result, Alert } from "antd";
 import { FC, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Input } from "antd";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/hooks/hook";
 
 const Inputs:FC = () => {
-  const [loadings, setLoadings] = useState([]);
+  const [loadings, setLoadings] = useState<any[]>([]);
 
-  let [input, setInput] = useState("");
-  let [text, setText] = useState("");
-  const [changeAlert, setChangeAlert] = useState("none");
+  let [input, setInput] = useState<string>("");
+  let [text, setText] = useState<string>("");
+  const [changeAlert, setChangeAlert] = useState<string>("none");
 
-  const users = useSelector((state:any) => state.toolkit.user);
+  const users = useAppSelector(state => state.toolkit.user);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { TextArea } = Input;
   const onChangeOne = (e:any) => {
-    setInput((input = e.target.value));
+    setInput((e.target.value));
   };
 
   const onChangeTwo = (e:any) => {
-    setText((text = e.target.value));
+    setText((e.target.value));
   };
 
   const sendPost = () => {

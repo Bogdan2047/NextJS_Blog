@@ -1,8 +1,10 @@
 import { Button, Checkbox, Col, Form, Input, Row, Select, Result } from "antd";
 import Link from "next/link";
 import { FC, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../rtk/userSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks/hook";
+
+
 
 const { Option } = Select;
 
@@ -40,19 +42,19 @@ const tailFormItemLayout = {
 
 
 type propsRegist = {
-  handleSignUp: any,
+  handleSignUp: Function,
 }
 
 const Register:FC<propsRegist> = (props:propsRegist) => {
   let { handleSignUp } = props
   const [form] = Form.useForm();
 
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
+  let [email, setEmail] = useState<string>("");
+  let [password, setPassword] = useState<string>("");
 
-  const users = useSelector((state:any) => state.toolkit.user);
+  const users = useAppSelector(state => state.toolkit.user);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const deleteHandler = () => {
     dispatch(removeUser());
@@ -63,11 +65,11 @@ const Register:FC<propsRegist> = (props:propsRegist) => {
   };
 
   const onChangeOne = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail((email = event.target.value));
+    setEmail((event.target.value));
   };
 
   const onChangeTwo = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword((password = event.target.value));
+    setPassword((event.target.value));
   };
 
   // const onFinish = (values = {}) => {
@@ -153,7 +155,6 @@ const Register:FC<propsRegist> = (props:propsRegist) => {
               <Form.Item
                 name="email"
                 label="E-mail"
-                onChange={onChangeOne}
                 style={{ color: "white" }}
                 rules={[
                   {
@@ -165,6 +166,7 @@ const Register:FC<propsRegist> = (props:propsRegist) => {
                     message: "Please input your E-mail!",
                   },
                 ]}
+                onChange={onChangeOne}
               >
                 <Input />
               </Form.Item>
@@ -187,8 +189,8 @@ const Register:FC<propsRegist> = (props:propsRegist) => {
                 name="confirm"
                 label="Repeat Password"
                 dependencies={["password"]}
-                onChange={onChangeTwo}
                 hasFeedback
+                onChange={onChangeTwo}
                 rules={[
                   {
                     required: true,

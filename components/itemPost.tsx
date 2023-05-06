@@ -1,15 +1,20 @@
 import { Card } from "antd";
 import { FC } from "react";
 
+type postsProps = {
+  title: string,
+  body: string,
+  id: string
+}
+
 type postProps = {
-  posts: any[]
+  posts: postsProps[]
 }
 
 const ItemPost:FC<postProps>= ({ posts }) => {
   return (
     <div style={{ paddingLeft: "10%" }}>
-      {posts &&
-        posts.map(({ title, body, id }) => (
+      {posts?.map(({ title, body, id }) => (
           <Card
             title="Post"
             style={{

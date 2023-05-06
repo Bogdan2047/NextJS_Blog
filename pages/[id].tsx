@@ -1,13 +1,13 @@
 import { Card } from "antd";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
 import { Button, Space } from "antd";
 import { deleteComment } from "../rtk/slice";
 import { FC } from "react";
+import { useAppDispatch, useAppSelector } from "@/hooks/hook";
 
 const PostInfo:FC = () => {
-  const info = useSelector((state:any) => state.toolkit.store.posts);
-  const dispatch = useDispatch();
+  const info = useAppSelector(state => state.toolkit.store.posts)
+  const dispatch = useAppDispatch();
 
   const router = useRouter();
 
@@ -16,11 +16,8 @@ const PostInfo:FC = () => {
 
   return (
     <div style={{ width: "100%", minHeight: "870px" }}>
-      {info.map((item:any) => {
-        if (item === null) {
-          return <></>;
-        }
-        if (item !== null) {
+      {info.map((item) => {
+        if (item) {
           if (item.id === id) {
             return (
               <div
@@ -52,8 +49,7 @@ const PostInfo:FC = () => {
                   </Card>
                 </div>
                 <div style={{ width: "100%" }}>
-                  {item.commit.length > 0 &&
-                    item.commit.map((elem:any) => {
+                  {item.commit?.map((elem:any) => {
                       if (elem !== null) {
                         return (
                           <div
@@ -103,6 +99,8 @@ const PostInfo:FC = () => {
               </div>
             );
           }
+        }else{
+          return<></>
         }
       })}
     </div>
