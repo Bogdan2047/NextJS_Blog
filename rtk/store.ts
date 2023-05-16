@@ -12,10 +12,12 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import postSlice  from "./slicePosts";
 
 const RootReducer = combineReducers({
   store: Reducer,
   user: userSlice,
+  post: postSlice
 });
 
 const persistConfig = {
@@ -33,8 +35,8 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+      }
+    })
 });
 
 export type RootState = ReturnType<typeof store.getState>

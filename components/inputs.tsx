@@ -1,9 +1,11 @@
 import { getPosts } from "../rtk/slice";
 import { Button, Result, Alert } from "antd";
 import { FC, useState } from "react";
-import { Input } from "antd";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/hook";
+import InputField from "./input"
+import TextAreaField from "./textarea";
+
 
 const Inputs:FC = () => {
   const [loadings, setLoadings] = useState<any[]>([]);
@@ -16,7 +18,6 @@ const Inputs:FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const { TextArea } = Input;
   const onChangeOne = (e:any) => {
     setInput((e.target.value));
   };
@@ -64,14 +65,14 @@ const Inputs:FC = () => {
     }, 1000);
   };
 
+
   return (
-    <div style={{ width: "100%" }}>
+    <div 
+    className="w-full"
+    >
       {users.email === null && (
         <div
-          style={{
-            paddingTop: "20%",
-            paddingLeft: "20%",
-          }}
+        className="pt-80 md:pt-40 pl-20 md:pl-36 w-full"
         >
           <Result
             title="Your not logged in"
@@ -108,21 +109,13 @@ const Inputs:FC = () => {
               }}
             />
           </div>
-          <div style={{ width: "75%", paddingTop: "20px" }}>
-            <Input
-              showCount
-              maxLength={20}
-              onChange={onChangeOne}
-              value={input}
-            />
+          <div className="md:w-9/12 2xl:w-3/5 pt-10">
+            <div>
+            <InputField onChangeOne={onChangeOne} setInput={input}/>
+            </div>
             <br />
             <br />
-            <TextArea
-              showCount
-              maxLength={100}
-              onChange={onChangeTwo}
-              value={text}
-            />
+            <TextAreaField onChangeTwo={onChangeTwo} setText={text}/>
             <div style={{ paddingTop: "20px" }}>
               <Button
                 type="primary"

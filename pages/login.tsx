@@ -24,7 +24,9 @@ const Login:FC = () => {
   };
 
   return (
-    <div style={{ width: "100%", minHeight: "870px" }}>
+    <div 
+    className="w-full min-h-screen"
+    >
       <Auth handleLogin={handleLogin} />
     </div>
   );

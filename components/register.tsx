@@ -1,43 +1,16 @@
-import { Button, Checkbox, Col, Form, Input, Row, Select, Result } from "antd";
 import Link from "next/link";
 import { FC, useState } from "react";
 import { removeUser } from "../rtk/userSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/hook";
+import {useCookies} from "react-cookie"
+import {useRouter} from "next/router"
+import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IShippingFields } from "./interface";
+import { Button, Result } from "antd";
+import { cookies } from "next/dist/client/components/headers";
 
 
-
-const { Option } = Select;
-
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
 
 
 
@@ -46,65 +19,49 @@ type propsRegist = {
 }
 
 const Register:FC<propsRegist> = (props:propsRegist) => {
-  let { handleSignUp } = props
-  const [form] = Form.useForm();
 
-  let [email, setEmail] = useState<string>("");
-  let [password, setPassword] = useState<string>("");
+  const router = useRouter()
+
+  
+  let { handleSignUp } = props
 
   const users = useAppSelector(state => state.toolkit.user);
 
+  const [cookies, setCookie, removeCookie] = useCookies(['regist'])
+
+
   const dispatch = useAppDispatch();
+
+  const {register,handleSubmit, formState: {errors}, reset} = useForm<IShippingFields>({mode: "onBlur"})
+
+  const onSubmit:SubmitHandler<IShippingFields> = data => {
+    handleSignUp(data.email, data.password);
+    setCookie('regist', cookies, {
+          path: '/',
+        });
+    reset()
+    router.replace("/");
+
+  }
 
   const deleteHandler = () => {
     dispatch(removeUser());
+    removeCookie('regist');
+
   };
-
-  const sendData = () => {
-    handleSignUp(email, password);
-  };
-
-  const onChangeOne = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail((event.target.value));
-  };
-
-  const onChangeTwo = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword((event.target.value));
-  };
-
-  // const onFinish = (values = {}) => {
-  //   console.log(values);
-  // };
-
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="380">+380</Option>
-        <Option value="044">+044</Option>
-      </Select>
-    </Form.Item>
-  );
-
+  
   return (
     <>
-      {users.email !== null && (
+      {users.email !== null &&(
+        <div className="2xl:pt-80 md:pt-40 md:pl-28 2xl:pl-96 w-full">
         <div
-          style={{
-            paddingTop: "15%",
-            paddingLeft: "27%",
-          }}
+              className="pl-40"
+
         >
           <Result
             status="success"
-            style={{
-              backgroundColor: "LightSlateGray ",
-              width: "500px",
-              borderRadius: "10px",
-            }}
+            className="bg-slate-400 w-96 rounded-xl "
+            
             title="Successfully Registred"
             subTitle="Welcome !!!"
             extra={[
@@ -115,211 +72,77 @@ const Register:FC<propsRegist> = (props:propsRegist) => {
               >
                 <Link href="/">Home</Link>
               </Button>,
-              <Button key="buy" danger onClick={() => deleteHandler()}>
+              <Button key="buy" danger onClick={deleteHandler}>
                 Loggout
               </Button>,
             ]}
           />
         </div>
+        </div>
       )}
       {users.email === null && (
-        <div
-          style={{
-            paddingTop: "10%",
-            paddingLeft: "25%",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "LightSlateGray ",
-              padding: "30px 40px",
-              borderRadius: "20px",
-              width: "580px",
-            }}
-          >
-            <Form
-              {...formItemLayout}
-              form={form}
-              name="register"
-              // onFinish={onFinish}
-              initialValues={{
-                residence: ["zhejiang", "hangzhou", "xihu"],
-                prefix: "380",
-              }}
-              style={{
-                maxWidth: 600,
-                color: "white",
-              }}
-              scrollToFirstError
-            >
-              <Form.Item
-                name="email"
-                label="E-mail"
-                style={{ color: "white" }}
-                rules={[
-                  {
-                    type: "email",
-                    message: "The input is not valid E-mail!",
-                  },
-                  {
-                    required: true,
-                    message: "Please input your E-mail!",
-                  },
-                ]}
-                onChange={onChangeOne}
-              >
-                <Input />
-              </Form.Item>
+        <div className="2xl:pt-80 md:pt-40 md:pl-48 2xl:pl-96 w-full">
+          <div className="pl-20">
+          <div className="bg-slate-400 w-2/5 rounded-xl pr-5 py-5">
 
-              <Form.Item
-                name="password"
-                label="Password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your password!",
-                  },
-                ]}
-                hasFeedback
-              >
-                <Input.Password />
-              </Form.Item>
-
-              <Form.Item
-                name="confirm"
-                label="Repeat Password"
-                dependencies={["password"]}
-                hasFeedback
-                onChange={onChangeTwo}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please confirm your password!",
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (!value || getFieldValue("password") === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        new Error(
-                          "The two passwords that you entered do not match!"
-                        )
-                      );
-                    },
-                  }),
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-
-              <Form.Item
-                name="nickname"
-                label="Nickname"
-                tooltip="What do you want others to call you?"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your nickname!",
-                    whitespace: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                name="phone"
-                label="Phone Number"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your phone number!",
-                  },
-                ]}
-              >
-                <Input
-                  addonBefore={prefixSelector}
-                  style={{
-                    width: "100%",
-                  }}
+          <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="text-3xl pl-12 text-grey">
+                <h1>Sign up</h1>
+              </div>
+            <div className="h-60, pt-5" style={{paddingLeft:"10%"}}>
+              <div >
+                <label>
+                  Display name
+                </label>
+              <input {...register('name',
+                          {
+                            required: "Name is require field!"
+                          })}
+                      style={{color: "black", width: "93%", borderRadius:"5px", paddingLeft: "5px"}}
+                      />
+                      {errors?.name && (
+                        <div style={{color: "red"}}>{errors.name.message}</div>
+                      )}
+              </div>
+              <div className="my-2.5">
+              <label>
+                  Email
+                </label>
+              <input {...register('email',
+                      {
+                        required: "Email is require field!",
+                        pattern: {
+                          value: /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+/,
+                          message: "Please enter valid email!"
+                        }
+                      })}
+                      style={{color: "black", width: "93%", borderRadius:"5px", paddingLeft: "5px"}}
                 />
-              </Form.Item>
-
-              <Form.Item
-                label="Captcha"
-                extra="We must make sure that your are a human."
-              >
-                <Row gutter={8}>
-                  <Col span={12}>
-                    <Form.Item
-                      name="captcha"
-                      noStyle
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input the captcha you got!",
-                        },
-                      ]}
-                    >
-                      <Input />
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Button
-                      style={{ backgroundColor: "royalBlue", color: "white" }}
-                    >
-                      Get captcha
-                    </Button>
-                  </Col>
-                </Row>
-              </Form.Item>
-
-              <Form.Item
-                name="gender"
-                label="Gender"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please select gender!",
-                  },
-                ]}
-              >
-                <Select placeholder="select your gender">
-                  <Option value="male">Male</Option>
-                  <Option value="female">Female</Option>
-                  <Option value="other">Other</Option>
-                </Select>
-              </Form.Item>
-
-              <Form.Item
-                name="agreement"
-                valuePropName="checked"
-                rules={[
-                  {
-                    validator: (_, value) =>
-                      value
-                        ? Promise.resolve()
-                        : Promise.reject(new Error("Should accept agreement")),
-                  },
-                ]}
-                {...tailFormItemLayout}
-              >
-                <Checkbox>
-                  I have read the <a href="">agreement</a>
-                </Checkbox>
-              </Form.Item>
-              <Form.Item {...tailFormItemLayout}>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{ backgroundColor: "royalBlue" }}
-                  onClick={sendData}
-                >
-                  Register
-                </Button>
-              </Form.Item>
-            </Form>
+                {errors?.email && (
+                  <div style={{color: "red"}}>{errors.email.message}</div>
+                )}
+              </div>
+              <div>
+              <label>
+                  Password
+                </label>
+                <input {...register('password',
+                          {
+                            required: "Password is require field!"
+                          })}
+                    type="password"
+                    style={{color: "black", width: "93%", borderRadius:"5px", paddingLeft: "5px"}}
+                />
+                {errors?.password && (
+                  <div style={{color: "red"}}>{errors.password.message}</div>
+                )}
+            </div>
+            <div className="pt-2.5">
+              <button style={{ backgroundColor: "royalblue", width: "70px", borderRadius:"5px" }}>Sign up</button>
+            </div>
+            </div>
+          </form>
+          </div>
           </div>
         </div>
       )}

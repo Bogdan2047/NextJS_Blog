@@ -1,5 +1,4 @@
 import {
-  AppstoreOutlined,
   ContainerOutlined,
   MenuFoldOutlined,
   PieChartOutlined,
@@ -40,6 +39,8 @@ const items: MenuItem[] = [
     getItem(<Link href="">About</Link>, "8"),
   ]),
 ];
+
+
 const Header:FC = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const toggleCollapsed = () => {

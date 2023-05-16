@@ -4,6 +4,7 @@ import { Providers } from "../rtk/provider";
 import "../lib/firebase";
 import { FC, ReactNode } from "react";
 import { LayoutProps } from "antd";
+import {CookiesProvider} from "react-cookie"
 
 type layoutProps = {
   children: ReactNode
@@ -12,6 +13,7 @@ type layoutProps = {
 const Layout:FC<LayoutProps> = ({ children }) => {
   return (
     <>
+    <CookiesProvider>
       <Providers>
         <div style={{ display: "flex" }}>
           <Header />
@@ -19,6 +21,7 @@ const Layout:FC<LayoutProps> = ({ children }) => {
         </div>
         <Footer />
       </Providers>
+      </CookiesProvider>
     </>
   );
 };

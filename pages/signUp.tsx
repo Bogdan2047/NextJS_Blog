@@ -25,7 +25,9 @@ const SignUp:FC = () => {
   };
 
   return (
-    <div style={{ width: "100%", minHeight: "870px" }}>
+    <div 
+    className="w-full min-h-screen"
+    >
       <Register handleSignUp={handleSignUp} />
     </div>
   );

@@ -15,64 +15,59 @@ const PostInfo:FC = () => {
 
 
   return (
-    <div style={{ width: "100%", minHeight: "870px" }}>
+    <div 
+    className='w-full min-h-screen'
+    
+    >
       {info.map((item) => {
         if (item) {
           if (item.id === id) {
             return (
               <div
-                style={{
-                  paddingTop: "10%",
-                  paddingLeft: "10%",
-                  paddingBottom: "5%",
-                }}
+              className="pt-40 md:pl-10 md:pt-20 pl-40 pb-20"
               >
                 <div>
                   <Card
-                    style={{
-                      height: "400px",
-                      backgroundColor: "LightSlateGray ",
-                      width: "75%",
-                    }}
+                  className="h-96 w-3/4 bg-slate-400"
                     key={item.id}
                   >
-                    <div style={{ textAlign: "center" }}>
+                    <div 
+                    className="text-center"
+                    >
                       <div>
-                        <h1 style={{ fontSize: "40px" }}>{item.title}</h1>
+                        <h1 
+                          className="text-5xl"
+                        >{item.title}</h1>
                       </div>
                       <hr />
                       <br />
                       <div>
-                        <h1 style={{ fontSize: "20px" }}>{item.text}</h1>
+                        <h1 
+                        className="text-xl"
+                        >{item.text}</h1>
                       </div>
                     </div>
                   </Card>
                 </div>
-                <div style={{ width: "100%" }}>
-                  {item.commit?.map((elem:any) => {
+                <div 
+                className="w-full"
+                >
+                  {item.commit?.map((elem) => {
                       if (elem !== null) {
                         return (
                           <div
-                            style={{
-                              paddingTop: "20px",
-                              paddingLeft: "5%",
-                            }}
+                              className="pt-5 md:pl-16 pl-24"
                           >
                             <div>
                               <Card
-                                style={{
-                                  minHeight: "50px",
-                                  width: "68%",
-                                  backgroundColor: "LightSlateGray ",
-                                }}
+                              className="h-15 w-8/12 bg-slate-400"
                               >
                                 <div
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                  }}
+                                    className="flex justify-between"
                                 >
-                                  <div style={{ color: "white" }}>
+                                  <div 
+                                  className="text-white"
+                                  >
                                     <h1>{elem.comment}</h1>
                                   </div>
                                   <div>

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type intState = {
-  email: any,
-  token: any,
-  id: any,
+  email: string|any,
+  token: string|any,
+  id: string|any,
 }
 
 const initialState: intState = {

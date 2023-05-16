@@ -13,31 +13,30 @@ type postProps = {
 
 const ItemPost:FC<postProps>= ({ posts }) => {
   return (
-    <div style={{ paddingLeft: "10%" }}>
+    <div 
+    className="2xl:pl-20 md:pl-0"
+    >
       {posts?.map(({ title, body, id }) => (
           <Card
             title="Post"
-            style={{
-              width: "70%",
-              backgroundColor: "LightSlateGray ",
-              color: "white",
-              marginTop: "20px",
-            }}
+            className="w-4/5 mt-5 bg-slate-400 text-white"
             key={id}
           >
             <div>
-              <div style={{ paddingTop: "10px" }}>
+              <div 
+              className="pt-2.5"
+              >
                 <h1
-                  style={{
-                    fontSize: "30px",
-                    fontWeight: "600",
-                    marginLeft: "20px",
-                  }}
+                className="text-3xl font-semibold ml-5"
                 >
                   {title}
                 </h1>
-                <span style={{ fontSize: "18px" }}>{body}</span>
-                <hr style={{ marginTop: "10px" }} />
+                <span 
+                className='text-lg'
+                >{body}</span>
+                <hr 
+                className="mt-2.5"
+                />
               </div>
             </div>
           </Card>

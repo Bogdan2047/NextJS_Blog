@@ -5,18 +5,20 @@ type commitData = {
   comment: string
 }
 
-type postData = {
+type PostData = {
   id?: string,
   title?: string,
   text?:string,
   commit?: commitData[]
 }
 
-type postState = {
-  posts: postData[],
+// type Text = Omit<PostData, "title">
+
+type PostState = {
+  posts: PostData[],
 };
 
-const initialState:postState = {
+const initialState:PostState = {
   posts: [],
 };
 
@@ -33,12 +35,12 @@ export const postsSlice = createSlice({
       });
     },
     deletePost: (state, action) => {
-      state.posts = state.posts.filter((item:any) => item?.id !== action.payload);
+      state.posts = state.posts.filter((item) => item?.id !== action.payload);
     },
     getCommit: (state, action) => {
-      state.posts.some((item:any) => {
+      state.posts.some((item) => {
         if (item?.id === action.payload.id) {
-          item?.commit.push({
+          item.commit?.push({
             id: new Date().toISOString(),
             comment: action.payload.text,
           });
@@ -46,9 +48,9 @@ export const postsSlice = createSlice({
       });
     },
     deleteComment: (state, action) => {
-      state.posts.some((item:any) => {
+      state.posts.some((item) => {
         if (item) {
-          item.commit = item?.commit.filter(
+          item.commit = item.commit?.filter(
             (item:any) => item.id !== action.payload
           );
         }

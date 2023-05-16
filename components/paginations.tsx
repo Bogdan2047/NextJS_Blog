@@ -1,5 +1,4 @@
 import { FC } from "react";
-import styles from "../styles/other.module.css";
 
 type propsPagin = {
   defaultCurrent: number,
@@ -9,10 +8,7 @@ type propsPagin = {
 
 const Paginations:FC<propsPagin> = (props:propsPagin) => {
 
-let { defaultCurrent, total, paginate } = props
-
-
-
+let { defaultCurrent, total, paginate } = props;
 
   const pageNumbers = [];
 
@@ -24,33 +20,16 @@ let { defaultCurrent, total, paginate } = props
     <>
       {pageNumbers.length ? (
         <div
-          style={{
-            display: "flex",
-            paddingTop: "20px",
-            paddingBottom: "20px",
-            paddingLeft: "10%",
-          }}
+        className="flex pt-5 pb-5 2xl:pl-20 md:pl-0"
         >
           {pageNumbers.map((number) => (
             <li
-              className={styles.click}
               key={number}
-              style={{
-                listStyleType: "none",
-                cursor: "pointer",
-                marginLeft: "3px",
-                width: "25px",
-                backgroundColor: "white",
-                textAlign: "center",
-                borderRadius: "2px",
-              }}
+              className="w-6 text-center list-none bg-white ml-0.5 cursor-pointer rounded-sm hover:bg-amber-600"
             >
               <a onClick={() => paginate(number)}>
                 <span
-                  style={{
-                    color: "black",
-                    fontWeight: "600",
-                  }}
+                className="text-black font-semibold hover:text-white"
                 >
                   {number}
                 </span>

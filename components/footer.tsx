@@ -3,25 +3,43 @@ import React, { FC } from "react";
 import Marquee from "react-fast-marquee";
 
 const Footer:FC = () => (
+  <div 
+  className=" w-full pt-10 "
+  >
   <Alert
-    style={{ height: "80px", width: "100%" }}
+  className="h-20 "
+
     banner
     message={
       <Marquee pauseOnHover gradient={false}>
-        <span style={{ fontSize: "25px" }}>Your ads could be here !!! :)</span>
-        <span style={{ marginLeft: "60px", fontSize: "25px" }}>2023 year</span>
-        <span style={{ marginLeft: "60px", fontSize: "25px" }}>
+        <span 
+        className="text-2xl"
+        >Your ads could be here !!! :)</span>
+        <span 
+        className="ml-16 text-2xl"
+        >2023 year</span>
+        <span 
+        className="ml-16 text-2xl"
+        >
           Hebron IT academy
         </span>
-        <span style={{ marginLeft: "60px", fontSize: "25px" }}>Kryvbass</span>
-        <span style={{ marginLeft: "60px", fontSize: "25px" }}>
+        <span 
+        className="ml-16 text-2xl"
+        >
+          Kryvbass</span>
+        <span 
+        className="ml-16 text-2xl"
+        >
           Why always want sleep?
         </span>
-        <span style={{ marginLeft: "60px", fontSize: "25px" }}>
+        <span 
+        className="ml-16 text-2xl"
+        >
           Штани за 40 гривень
         </span>
       </Marquee>
     }
   />
+  </div>
 );
 export default Footer;

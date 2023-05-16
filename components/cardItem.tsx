@@ -13,7 +13,7 @@ type propsCard = {
   id: string | any,
   title: string | undefined,
   text: string | undefined,
-  commit?: any[] | undefined[] | undefined,
+  commit?: string[] | any[] | undefined,
 }
 
 const CardItem:FC<propsCard>= (props:propsCard) => {
@@ -45,51 +45,45 @@ const CardItem:FC<propsCard>= (props:propsCard) => {
     dispatch(deletePost(id));
   };
 
-  const handleTextArea = (e:any) => {
-    setDatas((datas) => e.target.value);
+  const handleTextArea = (event:React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDatas((datas) => event.target.value);
   };
 
   let totalComents = commit?.length || 0;
 
   return (
-    <div style={{ width: "100%" }}>
-      <div>
-        <div className={styles.posts}>
+    <div className="w-full">
+      <div
+      className=" 2xl:w-3/5 md:w-9/12 mt-2.5"
+      >
+        <div>
           <Card
             title="POST"
             key={id}
-            style={{
-              backgroundColor: "LightSlateGray ",
-              marginTop: "10px",
-              width: "75%",
-            }}
+            className="bg-slate-400 mt-2.5"
           >
             <Card
               type="inner"
               title="Relevants"
               extra={<Link href={`${id}`}>More</Link>}
-              style={{ backgroundColor: "LightSlateGray " }}
+              className="bg-slate-400"
             >
               <div>
                 <div>
-                  <span style={{ fontSize: "30px" }}>{title}</span>
+                  <span 
+                    className="text-3xl"
+                  >{title}</span>
                 </div>
                 <hr />
                 <div>
                   <p
-                    style={{
-                      fontSize: "20px",
-                      paddingBottom: "20px",
-                    }}
+                    className="text-xl pb-5"
                   >
                     {text}
                   </p>
                 </div>
                 <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
+                className="flex justify-between"
                 >
                   <div>
                     <Space wrap>
@@ -127,24 +121,15 @@ const CardItem:FC<propsCard>= (props:propsCard) => {
           style={{
             display: `${change}`,
             paddingTop: "20px",
-            paddingBottom: "10%",
           }}
         >
           <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "75%",
-            }}
+          className="flex justify-between 2xl:w-6/6"
           >
             <TextArea
               showCount
               maxLength={100}
-              style={{
-                height: "30px",
-                resize: "none",
-                width: "900px",
-              }}
+              className="h-8 w-5/6"
               value={datas}
               onChange={handleTextArea}
               placeholder="disable resize"

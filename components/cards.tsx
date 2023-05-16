@@ -11,7 +11,7 @@ const Cards:FC = () => {
       {users.email ? (
         <div>
           <div
-            style={{ paddingTop: "20px", width: "100%", paddingBottom: "20px" }}
+          className="pt-5 pb-5 w-full"
           >
             {data === undefined && <></>}
             {data?.map((item) => {
