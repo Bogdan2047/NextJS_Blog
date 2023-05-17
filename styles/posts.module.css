@@ -1,0 +1,27 @@
+.posts {
+  animation: show 2s forwards;
+}
+
+@keyframes show {
+  0% {
+    transform: translateX(-300px);
+  }
+
+  100% {
+    transform: translateX();
+  }
+}
+
+/* .delete {
+  animation: hide 2s forwards;
+}
+
+@keyframes hide {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-300px);
+  }
+} */
