@@ -1,0 +1,11 @@
+.common {
+  @apply mt-0 w-4/5 h-screen pl-40;
+
+  .blog {
+    @apply pr-96;
+
+    .name {
+      @apply text-center text-4xl;
+    }
+  }
+}
